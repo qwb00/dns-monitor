@@ -25,12 +25,7 @@ ProgramArguments parse_args(int argc, char **argv) {
     options.domainsfile = NULL;
     options.translationsfile = NULL;
 
-    if (argc < 2) {
-        print_usage(argv[0]);
-        exit(BAD_ARGUMENTS);
-    }
-
-    while((opt = getopt(argc, argv, "i:p:vd:t:") != -1)) {
+    while((opt = getopt(argc, argv, "i:p:vd:t:")) != -1) {
         switch(opt) {
             case 'i':
                 options.interface = optarg;
@@ -48,9 +43,16 @@ ProgramArguments parse_args(int argc, char **argv) {
                 options.translationsfile = optarg;
                 break;
             default:
+                printf("Error: Unknown option -%c\n", optopt);
                 print_usage(argv[0]);
                 exit(BAD_ARGUMENTS);
         }
+    }
+
+    if(!options.interface && !options.pcapfile) {
+        fprintf(stderr, "Error: You must specify either -i <interface> or -p <pcapfile>.\n");
+        print_usage(argv[0]);
+        exit(BAD_ARGUMENTS);
     }
 
     if (options.interface && options.pcapfile) {
