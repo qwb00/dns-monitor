@@ -1,8 +1,8 @@
 TARGET = dns-monitor
 CC = gcc
 CFLAGS = -Wall -Wextra -g
-LDFLAGS = -lpcap
-SRCS = main.c args.c dns_capture.c
+LDFLAGS = -lpcap -lresolv
+SRCS = main.c args.c dns_capture.c domains.c translations.c process_dns_packet.c print_dns.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(TARGET)
