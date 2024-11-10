@@ -13,8 +13,6 @@
 #include "process_dns_packet.h"
 #include "print_dns.h"
 
-volatile sig_atomic_t stop_capture = 0;
-
 void dns_packet_handler(u_char *args, const struct pcap_pkthdr *header, const u_char *packet);
 void capture_dns_packets(DnsMonitorContext *context);
 void handle_signal(int signal);

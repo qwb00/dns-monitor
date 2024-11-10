@@ -1,5 +1,6 @@
 #include "dns_capture.h"
 
+volatile sig_atomic_t stop_capture = 0;
 // Signal handler function
 void handle_signal(int signal) {
     stop_capture = 1;
