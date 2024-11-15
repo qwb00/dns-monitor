@@ -2,16 +2,19 @@ TARGET = dns-monitor
 CC = gcc
 CFLAGS = -Wall -Wextra -g
 LDFLAGS = -lpcap -lresolv
-SRCS = main.c args.c dns_capture.c domains.c translations.c process_dns_packet.c print_dns.c
-OBJS = $(SRCS:.c=.o)
+SRCS = src/main.c src/args.c src/dns_capture.c src/domains.c src/translations.c src/process_dns_packet.c src/print_dns.c
+OBJS = $(SRCS:src/%.c=build/%.o)
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS) $(LDFLAGS)
 
-%.o: %.c
+build/%.o: src/%.c | build
 	$(CC) $(CFLAGS) -c $< -o $@
 
+build:
+	mkdir -p build
+
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -rf build $(TARGET)

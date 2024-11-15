@@ -1,6 +1,4 @@
-//
-// Created by Aleksander on 10.11.2024.
-//
+// Aleksander Postelga xposte00
 
 #include "print_dns.h"
 
@@ -66,14 +64,14 @@ void print_verbose_info(char *time_str, const char *src_ip, const char *dst_ip,
 // Helper function to print DNS information (IPv4 or IPv6)
 void print_dns_info(const struct pcap_pkthdr *header, const char *src_ip, const char *dst_ip,
                     const struct udphdr *udp_hdr, const u_char *dns_payload, DnsMonitorContext *context) {
-    // time formatting
+    // Time formatting
     char time_str[64];
     format_time(&header->ts, time_str, sizeof(time_str));
 
-    // dns header initialization
+    // DNS header initialization
     DnsHeader dns_header;
 
-    // getting data from dns header
+    // Getting data from DNS header
     dns_header.id = ntohs(*(uint16_t *)(dns_payload));
     dns_header.flags = ntohs(*(uint16_t *)(dns_payload + 2));
 
@@ -85,16 +83,51 @@ void print_dns_info(const struct pcap_pkthdr *header, const char *src_ip, const 
     // QR flag
     char qr = (dns_header.flags & 0x8000) ? 'R' : 'Q';
 
-    // Simple output
+    // Process DNS packet to extract domains and translations
+    int is_response = (qr == 'R');
+
+    const u_char *payload = dns_payload + 12;
+
     if (!context->args->verbose) {
+        // Process Question Section
+        payload = process_question_section(payload, dns_payload, dns_header.question_count, context);
+        if (!payload) {
+            return;
+        }
+
+        // Process Answer Section
+        if (dns_header.answer_count > 0) {
+            payload = process_resource_record_section(payload, dns_payload, dns_header.answer_count, "Answer", context, is_response);
+            if (!payload) {
+                return;
+            }
+        }
+
+        // Process Authority Section
+        if (dns_header.authority_count > 0) {
+            payload = process_resource_record_section(payload, dns_payload, dns_header.authority_count, "Authority", context, is_response);
+            if (!payload) {
+                return;
+            }
+        }
+
+        // Process Additional Section
+        if (dns_header.additional_count > 0) {
+            payload = process_resource_record_section(payload, dns_payload, dns_header.additional_count, "Additional", context, is_response);
+            if (!payload) {
+                return;
+            }
+        }
         printf("%s %s -> %s (%c %d/%d/%d/%d)\n",
                time_str, src_ip, dst_ip, qr,
                dns_header.question_count, dns_header.answer_count,
                dns_header.authority_count, dns_header.additional_count);
     } else {
+        // In verbose mode, print detailed information
         print_verbose_info(time_str, src_ip, dst_ip, udp_hdr, dns_payload, qr, &dns_header, context);
     }
 }
+
 
 
 // Function to print DNS information for IPv4 packets

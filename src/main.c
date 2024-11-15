@@ -1,6 +1,5 @@
-//
-// Created by Aleksander on 26.09.2024.
-//
+// Aleksander Postelga xposte00
+
 #include "args.h"
 #include "dns_capture.h"
 #include "domains.h"
@@ -12,20 +11,22 @@ int main(int argc, char **argv) {
     // Initialize context
     DnsMonitorContext context;
     context.args = &args;
+
+    // Initialize domain set and translation set
     initialize_domain_set(&context.domain_set);
     initialize_translation_set(&context.translation_set);
 
-    // Initialize domain set
+    // if domains file is provided, load domain names
     if (args.domains_file) {
         load_domains_from_file(&context.domain_set, args.domains_file);
     }
 
-    // Initialize translation set
+    // if translations file is provided, load domain-to-IP translations
     if (args.translations_file) {
         load_translations_from_file(&context.translation_set, args.translations_file);
     }
 
-    // Set up signal handling to clean up on interruption
+    // sets up signal handling
     struct sigaction sa;
     sa.sa_handler = handle_signal;
     sigemptyset(&sa.sa_mask);

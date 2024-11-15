@@ -1,6 +1,4 @@
-//
-// Created by Aleksander on 26.09.2024.
-//
+// Aleksander Postelga xposte00
 
 #ifndef DNS_MONITOR_ARGS_H
 #define DNS_MONITOR_ARGS_H

@@ -1,3 +1,5 @@
+// Aleksander Postelga xposte00
+
 #include "dns_capture.h"
 
 volatile sig_atomic_t stop_capture = 0;
@@ -86,6 +88,7 @@ void process_ipv6_packet(const u_char *packet, const struct pcap_pkthdr *header,
 void dns_packet_handler(u_char *context_ptr, const struct pcap_pkthdr *header, const u_char *packet) {
     if (stop_capture) {
         pcap_breakloop(((DnsMonitorContext *) context_ptr)->pcap_handle);
+        free_all_resources((DnsMonitorContext *) context_ptr);
         return;
     }
 

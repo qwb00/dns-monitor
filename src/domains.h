@@ -1,6 +1,4 @@
-//
-// Created by Aleksander on 28.09.2024.
-//
+// Aleksander Postelga xposte00
 
 #ifndef DOMAINS_H
 #define DOMAINS_H

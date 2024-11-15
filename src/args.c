@@ -1,6 +1,4 @@
-//
-// Created by Aleksander on 26.09.2024.
-//
+// Aleksander Postelga xposte00
 
 #include "args.h"
 
@@ -45,9 +43,8 @@ ProgramArguments parse_args(int argc, char **argv) {
                 break;
             case 'h':
                 print_usage(argv[0]);
-                break;
+                exit(EXIT_SUCCESS);
             default:
-                printf("Error: Unknown option -%c\n", optopt);
                 print_usage(argv[0]);
                 exit(BAD_ARGUMENTS);
         }

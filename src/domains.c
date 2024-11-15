@@ -1,6 +1,4 @@
-//
-// Created by Aleksander Postelga (xposte00)
-//
+// Aleksander Postelga xposte00
 
 #include "domains.h"
 
@@ -46,12 +44,12 @@ int add_domain(DomainSet *set, const char *domain, const char *filename) {
 
     // Append to file if filename is provided
     if (filename != NULL) {
-        FILE *file = fopen(filename, "a");
+        FILE *file = fopen(filename, "a+");
         if (file) {
             fprintf(file, "%s\n", domain);
             fclose(file);
         } else {
-            fprintf(stderr, "Error opening domain file %s for appending\n", filename);
+            fprintf(stderr, "Error: opening domain file %s for appending\n", filename);
         }
     }
     return 1; // added
@@ -64,10 +62,10 @@ void load_domains_from_file(DomainSet *set, const char *filename) {
         while (fgets(line, sizeof(line), file)) {
             // Remove newline
             line[strcspn(line, "\r\n")] = '\0';
-            add_domain(set, line, NULL); // NULL filename to avoid writing back to file
+            add_domain(set, line, NULL); // NULL needed to avoid appending to file
         }
         fclose(file);
     } else {
-        // File may not exist, that's fine
+        // file may not exist, that's fine :)
     }
 }

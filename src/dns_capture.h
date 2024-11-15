@@ -1,4 +1,4 @@
-// dns_capture.h
+// Aleksander Postelga xposte00
 
 #ifndef DNS_MONITOR_DNS_CAPTURE_H
 #define DNS_MONITOR_DNS_CAPTURE_H

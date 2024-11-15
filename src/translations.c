@@ -1,6 +1,4 @@
-//
-// Created by Aleksander on 28.09.2024.
-//
+// Aleksander Postelga xposte00
 
 #include "translations.h"
 
