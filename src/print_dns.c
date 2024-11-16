@@ -74,7 +74,6 @@ void print_dns_info(const struct pcap_pkthdr *header, const char *src_ip, const 
     // Getting data from DNS header
     dns_header.id = ntohs(*(uint16_t *)(dns_payload));
     dns_header.flags = ntohs(*(uint16_t *)(dns_payload + 2));
-
     dns_header.question_count = ntohs(*(uint16_t *)(dns_payload + 4));
     dns_header.answer_count = ntohs(*(uint16_t *)(dns_payload + 6));
     dns_header.authority_count = ntohs(*(uint16_t *)(dns_payload + 8));

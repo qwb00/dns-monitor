@@ -30,6 +30,7 @@ void process_ipv4_packet(const u_char *packet, const struct pcap_pkthdr *header,
     print_dns_information(header, ip_hdr, udp_hdr, dns_payload, context);
 }
 
+// skips the ipv6 ext header
 const u_char *skip_ipv6_extension_headers(const u_char *payload, uint8_t *next_header, const u_char *end_of_packet) {
     while (*next_header != IPPROTO_UDP) {
         switch (*next_header) {
@@ -45,14 +46,6 @@ const u_char *skip_ipv6_extension_headers(const u_char *payload, uint8_t *next_h
                 if (payload + 8 > end_of_packet) return NULL;
                 *next_header = payload[0]; // next header
                 payload += 8; // next header + reserved + fragment offset + res + m flag + identification = 8 bytes
-                break;
-            case IPPROTO_AH:
-                if (payload + 2 > end_of_packet) return NULL;
-                uint8_t ext_hdr_len_ah = payload[1]; // ext hdr len
-                *next_header = payload[0]; // next header
-                // ext_hdr_len_ah is in 32-bit words,
-                // excluding the first 2 words, so add 2 and multiply by 4
-                payload += (ext_hdr_len_ah + 2) * 4;
                 break;
             default: //other headers are not supported
                 return NULL;
@@ -140,12 +133,14 @@ void capture_dns_packets(DnsMonitorContext *context) {
     if (pcap_compile(handle, &fp, filter_exp, 0, PCAP_NETMASK_UNKNOWN) == -1) {
         fprintf(stderr, "Error compiling filter: %s\n", pcap_geterr(handle));
         free_all_resources(context);
+        pcap_freecode(&fp);
         exit(EXIT_FAILURE);
     }
 
     if (pcap_setfilter(handle, &fp) == -1) {
         fprintf(stderr, "Error setting filter: %s\n", pcap_geterr(handle));
         free_all_resources(context);
+        pcap_freecode(&fp);
         exit(EXIT_FAILURE);
     }
 
@@ -153,8 +148,10 @@ void capture_dns_packets(DnsMonitorContext *context) {
     if (pcap_loop(handle, -1, dns_packet_handler, (u_char *) context) == -1) {
         fprintf(stderr, "Error: %s\n", pcap_geterr(handle));
         free_all_resources(context);
+        pcap_freecode(&fp);
         exit(EXIT_FAILURE);
     }
 
+    pcap_freecode(&fp);
     pcap_close(handle);
 }

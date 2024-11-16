@@ -20,6 +20,7 @@ const char *get_dns_type_name(uint16_t type) {
 const char *get_dns_class_name(uint16_t class) {
     switch(class) {
         case 1: return "IN";   // Internet
+        case 2: return "CS";   // CSNET
         case 3: return "CH";   // Chaos
         case 4: return "HS";   // Hesiod
         default: return "UNKNOWN";
@@ -89,16 +90,23 @@ void process_mx_record(const u_char *packet_start, const u_char *payload, DnsMon
 void process_soa_record(const u_char *packet_start, const u_char *payload, uint16_t rdlength, DnsMonitorContext *context) {
     char mname[256], rname[256];
     const u_char *rdata_ptr = payload;
+    // Extract primary name server
     int mname_len = process_domain_name(packet_start, rdata_ptr, mname, sizeof(mname));
+    if(context->args->domains_file) {
+        add_domain(&context->domain_set, mname, context->args->domains_file);
+    }
     if (mname_len < 0) return;
     rdata_ptr += mname_len;
 
+    // Extract responsible party's email
     int rname_len = process_domain_name(packet_start, rdata_ptr, rname, sizeof(rname));
     if (rname_len < 0) return;
     rdata_ptr += rname_len;
 
+    // Verify sufficient data for timers
     if (rdata_ptr + 20 > payload + rdlength) return;
 
+    // Extract timers
     uint32_t serial = ntohl(*(uint32_t *) rdata_ptr); rdata_ptr += 4;
     uint32_t refresh = ntohl(*(uint32_t *) rdata_ptr); rdata_ptr += 4;
     uint32_t retry = ntohl(*(uint32_t *) rdata_ptr); rdata_ptr += 4;
@@ -110,11 +118,14 @@ void process_soa_record(const u_char *packet_start, const u_char *payload, uint1
 }
 
 void process_srv_record(const u_char *packet_start, const u_char *payload, DnsMonitorContext *context) {
-    uint16_t priority = ntohs(*(uint16_t *) payload);
-    uint16_t weight = ntohs(*(uint16_t *) (payload + 2));
-    uint16_t port = ntohs(*(uint16_t *) (payload + 4));
+    uint16_t priority = ntohs(*(uint16_t *) payload); // extract priority
+    uint16_t weight = ntohs(*(uint16_t *) (payload + 2)); // extract weight
+    uint16_t port = ntohs(*(uint16_t *) (payload + 4)); // extract port
     char domain[256];
     int name_len = process_domain_name(packet_start, payload + 6, domain, sizeof(domain));
+    if(context->args->domains_file) {
+        add_domain(&context->domain_set, domain, context->args->domains_file);
+    }
 
     if (name_len >= 0) {
         if (context->args->verbose) printf("%u %u %u %s.\n", priority, weight, port, domain);
