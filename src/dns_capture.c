@@ -5,6 +5,7 @@
 volatile sig_atomic_t stop_capture = 0;
 // Signal handler function
 void handle_signal(int signal) {
+    (void)signal;
     stop_capture = 1;
 }
 
@@ -79,12 +80,6 @@ void process_ipv6_packet(const u_char *packet, const struct pcap_pkthdr *header,
 
 // Modify the dns_packet_handler function to handle both IPv4 and IPv6
 void dns_packet_handler(u_char *context_ptr, const struct pcap_pkthdr *header, const u_char *packet) {
-    if (stop_capture) {
-        pcap_breakloop(((DnsMonitorContext *) context_ptr)->pcap_handle);
-        free_all_resources((DnsMonitorContext *) context_ptr);
-        return;
-    }
-
     DnsMonitorContext *context = (DnsMonitorContext *) context_ptr;
 
     int link_type = pcap_datalink(context->pcap_handle);
@@ -144,12 +139,14 @@ void capture_dns_packets(DnsMonitorContext *context) {
         exit(EXIT_FAILURE);
     }
 
-    // Starts packet capturing
-    if (pcap_loop(handle, -1, dns_packet_handler, (u_char *) context) == -1) {
-        fprintf(stderr, "Error: %s\n", pcap_geterr(handle));
-        free_all_resources(context);
-        pcap_freecode(&fp);
-        exit(EXIT_FAILURE);
+    // Starts packet capturing until signal was handled
+    while (!stop_capture) {
+        if (pcap_dispatch(handle, -1, dns_packet_handler, (u_char *) context) == -1) {
+            fprintf(stderr, "Error: %s\n", pcap_geterr(handle));
+            free_all_resources(context);
+            pcap_freecode(&fp);
+            exit(EXIT_FAILURE);
+        }
     }
 
     pcap_freecode(&fp);
