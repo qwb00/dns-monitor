@@ -107,7 +107,7 @@ void capture_dns_packets(DnsMonitorContext *context) {
     pcap_t *handle;
 
     if(context->args->interface) {
-        handle = pcap_open_live(context->args->interface, 65536, 1, 1000, errbuf);
+        handle = pcap_open_live(context->args->interface, 65536, 1, 100, errbuf);
     } else {
         handle = pcap_open_offline(context->args->pcap_file, errbuf);
     }
