@@ -25,6 +25,10 @@ int domain_exists(DomainSet *set, const char *domain) {
 }
 
 int add_domain(DomainSet *set, const char *domain, const char *filename) {
+    if (domain == NULL || strlen(domain) == 0) {
+        return 0; // Invalid domain, do not add
+    }
+
     if (domain_exists(set, domain)) {
         return 0; // already exists
     }

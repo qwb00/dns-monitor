@@ -26,6 +26,11 @@ int translation_exists(TranslationSet *set, const char *domain, const char *ip) 
 }
 
 int add_translation(TranslationSet *set, const char *domain, const char *ip, const char *filename) {
+    // Check if domain or IP is NULL or empty
+    if (domain == NULL || strlen(domain) == 0 || ip == NULL || strlen(ip) == 0) {
+        return 0; // Invalid input, do not add
+    }
+
     if (translation_exists(set, domain, ip)) {
         return 0; // already exists
     }
