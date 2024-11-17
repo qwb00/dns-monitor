@@ -141,11 +141,16 @@ void capture_dns_packets(DnsMonitorContext *context) {
 
     // Starts packet capturing until signal was handled
     while (!stop_capture) {
-        if (pcap_dispatch(handle, -1, dns_packet_handler, (u_char *) context) == -1) {
+        int ret = pcap_dispatch(handle, -1, dns_packet_handler, (u_char *) context);
+        if (ret == -1) {
+            // Error occurred during packet processing
             fprintf(stderr, "Error: %s\n", pcap_geterr(handle));
             free_all_resources(context);
             pcap_freecode(&fp);
             exit(EXIT_FAILURE);
+        } else if (ret == 0 && pcap_file(handle) != NULL) {
+            // End of file reached for offline PCAP processing
+            break;
         }
     }
 
