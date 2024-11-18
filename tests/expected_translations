@@ -1,0 +1,7 @@
+ns1.test.local 127.0.0.1
+ns1.test.local ::1
+mail.test.local 127.0.0.3
+www.test.local 127.0.0.2
+www.test.local 2001:db8::1
+google.com 142.251.36.78
+google.com 2a00:1450:4014:80e::200e

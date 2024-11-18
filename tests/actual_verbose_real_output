@@ -1,0 +1,93 @@
+Timestamp: 2024-11-17 21:28:14
+SrcIP: 192.168.1.104
+DstIP: 8.8.8.8
+SrcPort: UDP/61852
+DstPort: UDP/53
+Identifier: 0xE9F5
+Flags: QR=0, OPCODE=0, AA=0, TC=0, RD=1, RA=0, AD=1, CD=0, RCODE=0
+
+[Question Section]
+google.com. IN A
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 0)
+====================
+Timestamp: 2024-11-17 21:28:14
+SrcIP: 8.8.8.8
+DstIP: 192.168.1.104
+SrcPort: UDP/53
+DstPort: UDP/61852
+Identifier: 0xE9F5
+Flags: QR=1, OPCODE=0, AA=0, TC=0, RD=1, RA=1, AD=0, CD=0, RCODE=0
+
+[Question Section]
+google.com. IN A
+
+[Answer Section]
+google.com. 178 IN A 142.251.36.78
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 0)
+====================
+Timestamp: 2024-11-17 21:28:14
+SrcIP: 192.168.1.104
+DstIP: 8.8.8.8
+SrcPort: UDP/49368
+DstPort: UDP/53
+Identifier: 0xC662
+Flags: QR=0, OPCODE=0, AA=0, TC=0, RD=1, RA=0, AD=1, CD=0, RCODE=0
+
+[Question Section]
+google.com. IN AAAA
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 0)
+====================
+Timestamp: 2024-11-17 21:28:14
+SrcIP: 8.8.8.8
+DstIP: 192.168.1.104
+SrcPort: UDP/53
+DstPort: UDP/49368
+Identifier: 0xC662
+Flags: QR=1, OPCODE=0, AA=0, TC=0, RD=1, RA=1, AD=0, CD=0, RCODE=0
+
+[Question Section]
+google.com. IN AAAA
+
+[Answer Section]
+google.com. 167 IN AAAA 2a00:1450:4014:80e::200e
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 0)
+====================
+Timestamp: 2024-11-17 21:28:14
+SrcIP: 192.168.1.104
+DstIP: 8.8.8.8
+SrcPort: UDP/59633
+DstPort: UDP/53
+Identifier: 0xF57
+Flags: QR=0, OPCODE=0, AA=0, TC=0, RD=1, RA=0, AD=1, CD=0, RCODE=0
+
+[Question Section]
+google.com. IN MX
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 0)
+====================
+Timestamp: 2024-11-17 21:28:14
+SrcIP: 8.8.8.8
+DstIP: 192.168.1.104
+SrcPort: UDP/53
+DstPort: UDP/59633
+Identifier: 0xF57
+Flags: QR=1, OPCODE=0, AA=0, TC=0, RD=1, RA=1, AD=0, CD=0, RCODE=0
+
+[Question Section]
+google.com. IN MX
+
+[Answer Section]
+google.com. 25 IN MX 10 smtp.google.com.
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 0)
+====================

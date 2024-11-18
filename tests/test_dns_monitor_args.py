@@ -13,45 +13,45 @@ class TestDNSMonitorArgs(unittest.TestCase):
         return result
 
     def test_missing_required_options(self):
-        """Test that program exits with an error when neither -i nor -p is provided"""
+        """Ensures the program exits with an error if neither -i nor -p is provided."""
         result = self.run_dns_monitor()
         self.assertIn(b"Error: You must specify either -i <interface> or -p <pcapfile>.", result.stderr)
         self.assertEqual(result.returncode, 2)
 
     def test_both_options_provided(self):
-        """Test that program exits with an error when both -i and -p are provided."""
+        """Ensures the program exits with an error if both -i and -p are provided simultaneously"""
         result = self.run_dns_monitor("-i", "en0", "-p", "sample.pcap")
         self.assertIn(b"Error: You cannot specify both -i <interface> and -p <pcapfile>.", result.stderr)
         self.assertEqual(result.returncode, 2)
 
     def test_invalid_option(self):
-        """Test that program exits with an error when an invalid option is provided."""
+        """Verifies the program reports an error when an unsupported option is used."""
         result = self.run_dns_monitor("-x")
         self.assertIn(b"./dns-monitor: illegal option -- x", result.stderr)
         self.assertEqual(result.returncode, 2)
 
     def test_display_help(self):
-        """Test that program displays help information when -h is provided."""
+        """Confirms the program displays the help message and exits successfully when -h is provided"""
         result = self.run_dns_monitor("-h")
         self.assertIn(b"Usage:", result.stdout)
         self.assertEqual(result.returncode, 0)
 
     def test_valid_pcap_option(self):
-        """Test that program runs correctly with -p <pcapfile>."""
+        """Ensures the program correctly processes a valid PCAP file with the -p option."""
         pcap_file = "tests/dns_simple_output_test.pcap"  # Ensure this is a valid PCAP file
         result = self.run_dns_monitor("-p", pcap_file)
         self.assertNotIn(b"Error", result.stderr)
         self.assertEqual(result.returncode, 0)
 
     def test_verbose_with_pcap(self):
-        """Test that program runs correctly with -v and -p <pcapfile>."""
+        """Verifies the program operates correctly in verbose mode (-v) with a PCAP file."""
         pcap_file = "tests/dns_simple_output_test.pcap"
         result = self.run_dns_monitor("-v", "-p", pcap_file)
         self.assertNotIn(b"Error", result.stderr)
         self.assertEqual(result.returncode, 0)
 
     def test_combination_of_options(self):
-        """Test that program handles a combination of valid options"""
+        """Confirms the program handles valid combinations of options (-p, -v, -d, -t) and creates output files"""
         domains_file = "domains.txt"
         translations_file = "translations.txt"
         pcap_file = "tests/dns_simple_output_test.pcap"
@@ -63,13 +63,13 @@ class TestDNSMonitorArgs(unittest.TestCase):
         os.remove(translations_file)
 
     def test_invalid_pcap_file(self):
-        """Test that program exits with an error for an invalid PCAP file"""
+        """Ensures the program reports an error for a nonexistent PCAP file"""
         result = self.run_dns_monitor("-p", "nonexistent.pcap")
         self.assertIn(b"Error", result.stderr)
         self.assertNotEqual(result.returncode, 0)
 
     def test_invalid_interface(self):
-        """Test that program exits with an error for an invalid network interface"""
+        """Verifies the program reports an error when an invalid network interface is specified"""
         result = self.run_dns_monitor("-i", "invalid_interface")
         self.assertIn(b"Error", result.stderr)
         self.assertNotEqual(result.returncode, 0)

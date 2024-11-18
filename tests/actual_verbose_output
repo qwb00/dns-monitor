@@ -1,0 +1,222 @@
+Timestamp: 2024-11-17 21:49:57
+SrcIP: 127.0.0.1
+DstIP: 127.0.0.1
+SrcPort: UDP/45132
+DstPort: UDP/53
+Identifier: 0xF413
+Flags: QR=0, OPCODE=0, AA=0, TC=0, RD=1, RA=0, AD=1, CD=0, RCODE=0
+
+[Question Section]
+ns1.test.local. IN A
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 12)
+====================
+Timestamp: 2024-11-17 21:49:57
+SrcIP: 127.0.0.1
+DstIP: 127.0.0.1
+SrcPort: UDP/53
+DstPort: UDP/45132
+Identifier: 0xF413
+Flags: QR=1, OPCODE=0, AA=1, TC=0, RD=1, RA=1, AD=0, CD=0, RCODE=0
+
+[Question Section]
+ns1.test.local. IN A
+
+[Answer Section]
+ns1.test.local. 604800 IN A 127.0.0.1
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 28)
+====================
+Timestamp: 2024-11-17 21:49:57
+SrcIP: 127.0.0.1
+DstIP: 127.0.0.1
+SrcPort: UDP/42982
+DstPort: UDP/53
+Identifier: 0xAA54
+Flags: QR=0, OPCODE=0, AA=0, TC=0, RD=1, RA=0, AD=1, CD=0, RCODE=0
+
+[Question Section]
+ns1.test.local. IN AAAA
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 12)
+====================
+Timestamp: 2024-11-17 21:49:57
+SrcIP: 127.0.0.1
+DstIP: 127.0.0.1
+SrcPort: UDP/53
+DstPort: UDP/42982
+Identifier: 0xAA54
+Flags: QR=1, OPCODE=0, AA=1, TC=0, RD=1, RA=1, AD=0, CD=0, RCODE=0
+
+[Question Section]
+ns1.test.local. IN AAAA
+
+[Answer Section]
+ns1.test.local. 604800 IN AAAA ::1
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 28)
+====================
+Timestamp: 2024-11-17 21:49:57
+SrcIP: 127.0.0.1
+DstIP: 127.0.0.1
+SrcPort: UDP/50316
+DstPort: UDP/53
+Identifier: 0x4C7A
+Flags: QR=0, OPCODE=0, AA=0, TC=0, RD=1, RA=0, AD=1, CD=0, RCODE=0
+
+[Question Section]
+test.local. IN NS
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 12)
+====================
+Timestamp: 2024-11-17 21:49:57
+SrcIP: 127.0.0.1
+DstIP: 127.0.0.1
+SrcPort: UDP/53
+DstPort: UDP/50316
+Identifier: 0x4C7A
+Flags: QR=1, OPCODE=0, AA=1, TC=0, RD=1, RA=1, AD=0, CD=0, RCODE=0
+
+[Question Section]
+test.local. IN NS
+
+[Answer Section]
+test.local. 604800 IN NS ns1.test.local.
+
+[Additional Section]
+ns1.test.local. 604800 IN A 127.0.0.1
+ns1.test.local. 604800 IN AAAA ::1
+. 0 UNKNOWN OTHER (other data, length 28)
+====================
+Timestamp: 2024-11-17 21:49:58
+SrcIP: 127.0.0.1
+DstIP: 127.0.0.1
+SrcPort: UDP/50073
+DstPort: UDP/53
+Identifier: 0x6DDC
+Flags: QR=0, OPCODE=0, AA=0, TC=0, RD=1, RA=0, AD=1, CD=0, RCODE=0
+
+[Question Section]
+test.local. IN MX
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 12)
+====================
+Timestamp: 2024-11-17 21:49:58
+SrcIP: 127.0.0.1
+DstIP: 127.0.0.1
+SrcPort: UDP/53
+DstPort: UDP/50073
+Identifier: 0x6DDC
+Flags: QR=1, OPCODE=0, AA=1, TC=0, RD=1, RA=1, AD=0, CD=0, RCODE=0
+
+[Question Section]
+test.local. IN MX
+
+[Answer Section]
+test.local. 604800 IN MX 10 mail.test.local.
+
+[Additional Section]
+mail.test.local. 604800 IN A 127.0.0.3
+. 0 UNKNOWN OTHER (other data, length 28)
+====================
+Timestamp: 2024-11-17 21:49:58
+SrcIP: 127.0.0.1
+DstIP: 127.0.0.1
+SrcPort: UDP/34743
+DstPort: UDP/53
+Identifier: 0x3221
+Flags: QR=0, OPCODE=0, AA=0, TC=0, RD=1, RA=0, AD=1, CD=0, RCODE=0
+
+[Question Section]
+test.local. IN SOA
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 12)
+====================
+Timestamp: 2024-11-17 21:49:58
+SrcIP: 127.0.0.1
+DstIP: 127.0.0.1
+SrcPort: UDP/53
+DstPort: UDP/34743
+Identifier: 0x3221
+Flags: QR=1, OPCODE=0, AA=1, TC=0, RD=1, RA=1, AD=0, CD=0, RCODE=0
+
+[Question Section]
+test.local. IN SOA
+
+[Answer Section]
+test.local. 604800 IN SOA localhost. root.localhost. 3 604800 86400 2419200 604800
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 28)
+====================
+Timestamp: 2024-11-17 21:49:58
+SrcIP: 127.0.0.1
+DstIP: 127.0.0.1
+SrcPort: UDP/45277
+DstPort: UDP/53
+Identifier: 0x27B9
+Flags: QR=0, OPCODE=0, AA=0, TC=0, RD=1, RA=0, AD=1, CD=0, RCODE=0
+
+[Question Section]
+alias.test.local. IN CNAME
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 12)
+====================
+Timestamp: 2024-11-17 21:49:58
+SrcIP: 127.0.0.1
+DstIP: 127.0.0.1
+SrcPort: UDP/53
+DstPort: UDP/45277
+Identifier: 0x27B9
+Flags: QR=1, OPCODE=0, AA=1, TC=0, RD=1, RA=1, AD=0, CD=0, RCODE=0
+
+[Question Section]
+alias.test.local. IN CNAME
+
+[Answer Section]
+alias.test.local. 604800 IN CNAME www.test.local.
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 28)
+====================
+Timestamp: 2024-11-17 21:49:58
+SrcIP: 127.0.0.1
+DstIP: 127.0.0.1
+SrcPort: UDP/43058
+DstPort: UDP/53
+Identifier: 0x9F3C
+Flags: QR=0, OPCODE=0, AA=0, TC=0, RD=1, RA=0, AD=1, CD=0, RCODE=0
+
+[Question Section]
+_service._tcp.test.local. IN SRV
+
+[Additional Section]
+. 0 UNKNOWN OTHER (other data, length 12)
+====================
+Timestamp: 2024-11-17 21:49:58
+SrcIP: 127.0.0.1
+DstIP: 127.0.0.1
+SrcPort: UDP/53
+DstPort: UDP/43058
+Identifier: 0x9F3C
+Flags: QR=1, OPCODE=0, AA=1, TC=0, RD=1, RA=1, AD=0, CD=0, RCODE=0
+
+[Question Section]
+_service._tcp.test.local. IN SRV
+
+[Answer Section]
+_service._tcp.test.local. 604800 IN SRV 10 5 80 www.test.local.
+
+[Additional Section]
+www.test.local. 604800 IN A 127.0.0.2
+www.test.local. 604800 IN AAAA 2001:db8::1
+. 0 UNKNOWN OTHER (other data, length 28)
+====================
