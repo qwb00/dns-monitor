@@ -4,7 +4,7 @@ Login: xposte00
 Date Created: November 18, 2024
 
 Description:
-DNS Packet Monitor is a C program designed for capturing and analyzing DNS traffic. It supports both real-time monitoring and offline analysis of DNS packets from PCAP files. The program processes DNS queries and responses for both IPv4 and IPv6 and extracts key details such as DNS class names DNS types
+DNS Packet Monitor is a C program designed for capturing and analyzing DNS traffic. It supports both real-time monitoring and offline analysis of DNS packets from PCAP files. The program processes DNS queries and responses for both IPv4 and IPv6 and extracts key details.
 
 Limitations:
 
