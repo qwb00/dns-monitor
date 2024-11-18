@@ -25,4 +25,3 @@ void free_translation_set(TranslationSet *set);
 int translation_exists(TranslationSet *set, const char *domain, const char *ip);
 
 #endif // TRANSLATIONS_H
-

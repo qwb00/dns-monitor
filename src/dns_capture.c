@@ -3,6 +3,7 @@
 #include "dns_capture.h"
 
 volatile sig_atomic_t stop_capture = 0;
+
 // Signal handler function
 void handle_signal(int signal) {
     (void)signal;
@@ -31,7 +32,7 @@ void process_ipv4_packet(const u_char *packet, const struct pcap_pkthdr *header,
     print_dns_information(header, ip_hdr, udp_hdr, dns_payload, context);
 }
 
-// skips the ipv6 ext header
+// Skips the ipv6 ext header
 const u_char *skip_ipv6_extension_headers(const u_char *payload, uint8_t *next_header, const u_char *end_of_packet) {
     while (*next_header != IPPROTO_UDP) {
         switch (*next_header) {

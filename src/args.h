@@ -22,4 +22,3 @@ ProgramArguments parse_args(int argc, char **argv);
 void print_usage(char *prog_name);
 
 #endif //DNS_MONITOR_ARGS_H
-

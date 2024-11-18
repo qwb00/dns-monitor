@@ -1,0 +1,51 @@
+DNS Packet Monitor
+Author: Aleksander Postelga
+Login: xposte00
+Date Created: November 18, 2024
+
+Description:
+DNS Packet Monitor is a C program designed for capturing and analyzing DNS traffic. It supports both real-time monitoring and offline analysis of DNS packets from PCAP files. The program processes DNS queries and responses for both IPv4 and IPv6 and extracts key details such as DNS class names DNS types
+
+Limitations:
+
+Does not support link types other than Ethernet (DLT_EN10MB).
+Does not support any IPv6 extension headers except Hop-by-Hop, Destination, Routing.
+Supports only dns class names: IN, CS, CH, HS.
+Supports only dns type names: A, NS, CNAME, SOA, MX, AAAA, SRV.
+
+Usage:
+
+./dns-monitor (-i <interface> | -p <pcapfile>) [-v] [-d <domainsfile>]
+[-t <translationsfile>]
+
+Example Usage:
+
+Basic execution with interface:
+./dns-monitor -i en0
+
+Verbose output with PCAP file:
+./dns-monitor -p capture.pcap -v
+
+Recording domain names and translations:
+./dns-monitor -i eth0 -d domains -t translations
+
+Submitted Files:
+
+src/
+    args.c
+    args.h
+    dns_capture.c
+    dns_capture.h
+    dns_structures.h
+    domains.c
+    domains.h
+    main.c
+    print_dns.c
+    print_dns.h
+    process_dns_packet.c
+    process_dns_packet.h
+    translations.c
+    translations.h
+Makefile
+manual.pdf
+README

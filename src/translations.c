@@ -79,4 +79,3 @@ void load_translations_from_file(TranslationSet *set, const char *filename) {
         // File may not exist, that's fine
     }
 }
-

@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
         load_domains_from_file(&context.domain_set, args.domains_file);
     }
 
-    // if translations file is provided, load domain-to-IP translations
+    // If translations file is provided, load domain-to-IP translations
     if (args.translations_file) {
         load_translations_from_file(&context.translation_set, args.translations_file);
     }
@@ -46,4 +46,3 @@ int main(int argc, char **argv) {
 
     return 0;
 }
-

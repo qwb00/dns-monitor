@@ -20,4 +20,3 @@ void free_domain_set(DomainSet *set);
 int domain_exists(DomainSet *set, const char *domain);
 
 #endif // DOMAINS_H
-
